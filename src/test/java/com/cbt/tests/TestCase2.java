@@ -23,7 +23,7 @@ public class TestCase2 {
     @AfterMethod
     public void tearDownMethod() throws InterruptedException {
         Thread.sleep(3000);
-       // driver.quit();
+       //driver.quit();
     }
 
     @Test
@@ -163,4 +163,56 @@ public class TestCase2 {
         String expectedmessage="You've successfully completed registration!";
         Assert.assertTrue(actualmessage.equals(expectedmessage));
     }
+    @Test
+    public void test6() throws InterruptedException {
+        driver.manage().window().maximize();
+        driver.get("https://www.tempmailaddress.com/");
+        WebElement emailget = driver.findElement(By.id("email"));
+        String email1=emailget.getText();
+        System.out.println(email1);
+
+        driver.get("http://practice-cybertekschool.herokuapp.com/");
+        Thread.sleep(2000);
+        WebElement clickmail= driver.findElement(By.xpath("//ul/li[43]/a"));
+        clickmail.click();
+
+        WebElement entername=driver.findElement(By.name("full_name"));
+        entername.sendKeys("Mike Smith");
+
+        WebElement emailname=driver.findElement(By.name("email"));
+        emailname.sendKeys(email1);
+
+        WebElement signup=driver.findElement(By.name("wooden_spoon"));
+        signup.click();
+
+        WebElement message=driver.findElement(By.name("signup_message"));
+        String expectedmessage="Thank you for signing up. Click the button below to return to the home page.";
+        String  actualmessage= message.getText();
+        Assert.assertTrue(actualmessage.equals(expectedmessage));
+
+       driver.navigate().to("https://www.tempmailaddress.com/");
+       // driver.navigate().back();
+        Thread.sleep(3000);
+      //  driver.navigate().back();
+     //   Thread.sleep(1000);
+    //    driver.navigate().back();
+     //   Thread.sleep(1000);
+
+        WebElement openemail=driver.findElement(By.cssSelector("#schranka>tr"));
+        openemail.click();
+
+        WebElement gettext=driver.findElement(By.id("odesilatel"));
+        System.out.println(gettext.getText());
+        String actual=gettext.getText();
+        String expect="do-not-reply@practice.cybertekschool.com";
+        Assert.assertTrue(actual.equals(expect));
+
+        WebElement getsubext=driver.findElement(By.id("predmet"));
+        System.out.println(getsubext.getText());
+        String actualsub=getsubext.getText();
+        String expectsub="Thanks for subscribing to practice.cybertekschool.com!";
+        Assert.assertTrue(actualsub.equals(expectsub));
+
+    }
+
 }
