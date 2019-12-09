@@ -5,16 +5,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-public class TestCase1 {
-
+public class TestCase2 {
     WebDriver driver;
 
     @BeforeMethod
@@ -27,11 +23,11 @@ public class TestCase1 {
     @AfterMethod
     public void tearDownMethod() throws InterruptedException {
         Thread.sleep(3000);
-       driver.quit();
-}
+        driver.quit();
+    }
 
     @Test
-    public void testcase1() throws InterruptedException {
+    public void testcase2() throws InterruptedException {
         driver.get("https://qa1.vytrack.com");
 
         WebElement username=driver.findElement(By.id("prependedInput"));
@@ -44,25 +40,26 @@ public class TestCase1 {
         click.click();
 
         Actions actions = new Actions(driver);
-       WebElement activities = driver.findElement(By.xpath("(//li/a/span)[17]"));
+        WebElement activities = driver.findElement(By.xpath("(//li/a/span)[17]"));
         Thread.sleep(2000);
-       actions.moveToElement(activities).perform();
-       //activities.click();  19
+        actions.moveToElement(activities).perform();
+        //activities.click();  19
         Thread.sleep(2000);
-       WebElement calendar=driver.findElement(By.xpath("(//li/a/span)[19]"));
-       Thread.sleep(3000);
-       actions.moveToElement(calendar).click().perform();
-       Thread.sleep(5000);
-
-       WebElement options=driver.findElement(By.xpath("(//div[contains(@class,'btn btn-link')])[2]"));
+        WebElement calendar=driver.findElement(By.xpath("(//li/a/span)[19]"));
+        Thread.sleep(3000);
+        actions.moveToElement(calendar).click().perform();
         Thread.sleep(5000);
 
-        String actual=options.getText();
-        String expected="Options";
-        System.out.println(options.getText());
-       Assert.assertTrue(expected.equals(actual));
+        WebElement page=driver.findElement(By.xpath("(//label[contains(@*,'dib')])[2]"));
+        Thread.sleep(6000);
 
-        Assert.assertTrue(options.isDisplayed(),"options is displayed");
+        String actual=page.getText();
+        String  expected="Of 1 |";
+
+        System.out.println(actual);
+        Assert.assertTrue(expected.equals(actual));
+
+      Assert.assertTrue(page.isDisplayed(),"page number is equal to 1");
 
 
     }
